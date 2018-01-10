@@ -4,3 +4,5 @@
 	npm install --save express
 - To install nodemon: Su dung de server tu dong Restart lai moi khi co su thay doi trong file
 	npm install -g nodemon
+- Run
+	nodemon index.js
