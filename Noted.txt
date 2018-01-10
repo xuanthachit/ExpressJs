@@ -1,0 +1,4 @@
+- create the package.json file using npm
+	npm init
+- To install Express and add it to our package.json file
+	npm install --save express
