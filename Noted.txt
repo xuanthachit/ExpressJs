@@ -2,3 +2,5 @@
 	npm init
 - To install Express and add it to our package.json file
 	npm install --save express
+- To install nodemon: Su dung de server tu dong Restart lai moi khi co su thay doi trong file
+	npm install -g nodemon
