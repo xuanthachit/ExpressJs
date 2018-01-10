@@ -6,3 +6,24 @@
 	npm install -g nodemon
 - Run
 	nodemon index.js
+- In app.listen(port, [host], [backlog], [callback]])
+	backlog: The maximum number of queued pending connections. The default is 511.
+	callback: An asynchronous function that is called when the server starts listening for requests.
+- A special method, all, is provided by Express to handle all types of http methods at a particular 
+	route using the same function.
+	app.all('/test', function(req, res){
+   		res.send("HTTP method doesn't have any effect on this route!");
+	});
+------------------ Routers -----------------
+- Tach nho cac routers ra khoi file main vi du index.js
+	var router = express.Router();
+	...
+	module.exports = router;
+--> In index call router:
+	var things = require('./things.js');
+both index.js and things.js should be in same directory
+	app.use('/things', things);
+------------------ Dynamic route -------------
+- Using dynamic routes allows us to pass parameters and process based on them
+
+----------------------- Pattern Matched Routes ------------------------
