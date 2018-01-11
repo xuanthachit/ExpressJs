@@ -58,3 +58,11 @@ both index.js and things.js should be in same directory
 	Model.remove(condition, [callback])
 	Model.findOneAndRemove(condition, [callback])
 	Model.findByIdAndRemove(id, [callback])
+--------------------------- Cookies ---------------------
+- Dung de gui du lieu nho theo nhu cau luu lai tai Client, moi lan user load website cookie se gui request ve server
+- install
+	npm install --save cookie-parser
+------------------------ Session ------------------------------
+- Dung de truyen du lieu giua client va server, nhung khong doc duoc va luu tru tai client nhu cookies
+- install
+	npm install --save express-session
