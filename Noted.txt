@@ -46,3 +46,15 @@ both index.js and things.js should be in same directory
 - Tao moi CSDL
 	mongo
 	use my_db
+- Retrieving Documents
+	Model.find(conditions, callback)
+	Model.findOne(conditions, callback)
+	Model.findById(id, callback)
+- Updating Documents
+	Model.update(condition, updates, callback)
+	Model.findOneAndUpdate(condition, updates, callback)
+	Model.findByIdAndUpdate(id, updates, callback)
+- Deleting Documents
+	Model.remove(condition, [callback])
+	Model.findOneAndRemove(condition, [callback])
+	Model.findByIdAndRemove(id, [callback])

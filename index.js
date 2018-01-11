@@ -4,6 +4,7 @@ var things = require('./things.js');
 var middlew = require('./middleware.js');
 var form = require('./formdata.js');
 var mongotest = require('./mongotest.js');
+var cookie = require('./cookies.js');
 
 // app.method(path, handler): get, post, put, delete
 // app.get(route, callback)
@@ -46,6 +47,9 @@ app.use('/form', form);
 
 // MongoDB Test
 app.use('/mongotest', mongotest);
+
+// Cookies
+app.use('/cookies', cookie);
 
  // Other routes here, show pretty warning
 app.get('*', function(req, res){
