@@ -27,3 +27,22 @@ both index.js and things.js should be in same directory
 - Using dynamic routes allows us to pass parameters and process based on them
 
 ----------------------- Pattern Matched Routes ------------------------
+
+-----------------------------MiddleWare ------------------------
+- Application-level middleware: app
+- Router-level middleware: route
+- Error-handling middleware: can 4 tham so --> app.use(function (err, req, res, next) {}
+- Built-in middleware: express.static
+- Third-party middleware
+-------------------------- Templating ------------------
+- Pug: Tao file pud de hien thi ra client dang HTML
+	npm install --save pug
+------------------------- Form data ------------------
+- install
+	npm install --save body-parser multer
+-------------------------- Database -----------------------------
+- Install mogose
+	npm install --save mongoose
+- Tao moi CSDL
+	mongo
+	use my_db

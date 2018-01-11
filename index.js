@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var things = require('./things.js');
+var middlew = require('./middleware.js');
+var form = require('./formdata.js');
+var mongotest = require('./mongotest.js');
 
 // app.method(path, handler): get, post, put, delete
 // app.get(route, callback)
@@ -8,20 +11,18 @@ app.get('/', function(rep, res){
     res.send('Hello world!');
 });
 
-app.post('/', function(req, res){
-    res.send('You just called a post method at / \n');
-})
+// app.post('/', function(req, res){
+//     res.send('You just called a post method at / \n');
+// })
 
 app.all('/all', function(req, res){
     res.send("HTTP method doesn't have any effect on this route!");
  });
 
-
  // Dynamic route
- app.get('/:id', function(req, res){
-    res.send('The id: ' + req.params.id);
- });
-
+//  app.get('/:id', function(req, res){
+//     res.send('The id: ' + req.params.id);
+//  });
 
  // Complex dynamic route
  app.get('/things/:name/:id', function(req, res){
@@ -37,11 +38,19 @@ app.all('/all', function(req, res){
  app.use('/things', things);
 
 
+// ----------- Middleware --------------
+app.use('/middleware', middlew);
+
+// Form data
+app.use('/form', form);
+
+// MongoDB Test
+app.use('/mongotest', mongotest);
+
  // Other routes here, show pretty warning
 app.get('*', function(req, res){
     res.send('Sorry, this is an invalid URL.');
  });
-
 
 //app.listen(port, [host], [backlog], [callback]])
 app.listen(3000);
