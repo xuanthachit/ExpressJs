@@ -35,7 +35,7 @@ app.post('/signup', function (req, res) {
         res.status(400);
         res.send('Model invalid');
     } else {
-        UserInfo.find({ userName: req.body.userName }, function (err, response) {
+        UserInfo.findOne({ userName: req.body.userName }, function (err, response) {
             console.log(response);
             if (response != null) {
                 res.render('signup', {
@@ -49,7 +49,7 @@ app.post('/signup', function (req, res) {
                 });
                 model.save(function (err, User) {
                     if (!err) {
-                        res.render('/protected_page');
+                        res.redirect('/authentication/protected_page');
                     }
                 });
             }
@@ -58,7 +58,7 @@ app.post('/signup', function (req, res) {
 });
 
 // middleware function
-function checkSignIn(req, res) {
+function checkSignIn(req, res, next) {
     if (req.session.user) {
         next();     //If session exists, proceed to page
     } else {
@@ -94,13 +94,13 @@ app.get('/logout', function (req, res) {
     req.session.destroy(function () {
         console.log("user logged out.")
     });
-    res.redirect('/login');
+    res.redirect('/authentication/login');
 });
 
 app.use('/protected_page', function (err, req, res, next) {
     console.log(err);
     //User should be authenticated! Redirect him to log in.
-    res.redirect('/login');
+    res.redirect('/authentication/login');
 });
 
 module.exports = app;
