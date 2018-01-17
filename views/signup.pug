@@ -2,11 +2,8 @@ html
    head
       title Signup
    body
-      if(!message)
-         h4 #{message}
-         form(action = "/authentication" method = "POST")
-         input(name = "userName" type = "text" required placeholder = "User ID")
-         input(name = "password" type = "password" required placeholder = "Password")
-         button(type = "submit") Sign me up!
-      else
-            p Northing
+      h4 #{message}
+         form(action = "/authentication/signup" method = "POST")
+            input(name = "userName" type = "text" required placeholder = "User ID")
+            input(name = "password" type = "password" required placeholder = "Password")
+            button(type = "submit") Sign me up!

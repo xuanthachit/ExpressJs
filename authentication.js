@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
 mongoose.connect('mongodb://localhost:27017/my_db', {
     useMongoClient: true,
 })
@@ -10,6 +13,9 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 // for parsing application/json
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({ secret: "Your secret key" }));
 
 // Define model User
 var userInfo = mongoose.Schema({
@@ -19,32 +25,34 @@ var userInfo = mongoose.Schema({
 var UserInfo = mongoose.model("User", userInfo);
 
 // GET
-app.get('/', function (req, res) {
+app.get('/signup', function (req, res) {
     res.render('signup');
 });
 
 // POST
-app.post('', function (req, res) {
-    console.log('signup');
-    if (req.body.userName || req.body.password) {
+app.post('/signup', function (req, res) {
+    if (!req.body.userName || !req.body.password) {
         res.status(400);
         res.send('Model invalid');
     } else {
-        UserInfo.find({ userName: req.body.userName }, function (err, respone) {
-            if (respone != null) {
+        UserInfo.find({ userName: req.body.userName }, function (err, response) {
+            console.log(response);
+            if (response != null) {
                 res.render('signup', {
                     message: "User Already Exists! Login or choose another user id"
                 });
             }
-            var model = new UserInfo({
-                userName: req.body.userName,
-                password: req.body.password
-            });
-            model.save(function (err, User) {
-                if (!err) {
-                    res.redirect('/protected_page');
-                }
-            });
+            else {
+                var model = new UserInfo({
+                    userName: req.body.userName,
+                    password: req.body.password
+                });
+                model.save(function (err, User) {
+                    if (!err) {
+                        res.render('/protected_page');
+                    }
+                });
+            }
         })
     }
 });
