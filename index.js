@@ -7,6 +7,7 @@ var mongotest = require('./mongotest.js');
 var cookie = require('./cookies.js');
 var session = require('./session.js');
 var authentication = require('./authentication.js');
+var restAPI= require('./restAPI.js');
 
 // app.method(path, handler): get, post, put, delete
 // app.get(route, callback)
@@ -58,6 +59,9 @@ app.use('/session', session);
 
 // Authentication
 app.use('/authentication', authentication);
+
+// RestAPI
+app.use('/restapi', restAPI);
 
  // Other routes here, show pretty warning
 app.get('*', function(req, res){

@@ -66,3 +66,69 @@ both index.js and things.js should be in same directory
 - Dung de truyen du lieu giua client va server, nhung khong doc duoc va luu tru tai client nhu cookies
 - install
 	npm install --save express-session
+
+
+--------------------- Scaffolding ------------
+
+- Cho phep tao ra khung cua ung dung ma khong can tao tay director, middleware, 
+route file...
+- Scaffolding vi du la Yeoman
+
+	npm install -g yeoman
+OR
+	npm install -g generator-express-simple
+
+
+------------------------ Error Handling---------------------
+
+--------------------- DEBUG ----------------
+
+	DEBUG = express:* node index.js
+OR
+	DEBUG = express:application,express:router node index.js
+
+
+------------------ Structure --------------
+
+				----- Website ------
+test-project/
+   node_modules/
+   config/
+      db.js                //Database connection and configuration
+      credentials.js       //Passwords/API keys for external services used by your app
+      config.js            //Other environment variables
+   models/                 //For mongoose schemas
+      users.js
+      things.js
+   routes/                 //All routes for different entities in different files 
+      users.js
+      things.js
+   views/
+      index.pug
+      404.pug
+        ...
+   public/                 //All static content being served
+      images/
+      css/
+      javascript/
+   app.js
+   routes.js               //Require all routes in this and then require this file in 
+   app.js 
+   package.json
+
+			--------- Rest API -----------
+test-project/
+   node_modules/
+   config/
+      db.js                //Database connection and configuration
+      credentials.js       //Passwords/API keys for external services used by your app
+   models/                 //For mongoose schemas
+      users.js
+      things.js
+   routes/                 //All routes for different entities in different files 
+      users.js
+      things.js
+   app.js
+   routes.js               //Require all routes in this and then require this file in 
+   app.js 
+   package.json
