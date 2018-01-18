@@ -49,6 +49,8 @@ app.post('/signup', function (req, res) {
                 });
                 model.save(function (err, User) {
                     if (!err) {
+                        // Set user information into session
+                        req.session.user = User;
                         res.redirect('/authentication/protected_page');
                     }
                 });
@@ -64,12 +66,12 @@ function checkSignIn(req, res, next) {
     } else {
         var err = new Error("Not logged in!");
         console.log(req.session.user);
-        next(err);  //Error, trying to access unauthorized page!
+        next();  //Error, trying to access unauthorized page!
     }
 }
 
 app.get('/protected_page', checkSignIn, function (req, res) {
-    res.render('protected_page', { id: req.session.user.id })
+    res.render('protected_page', { userName: req.session.user.userName });
 });
 
 app.get('/login', function (req, res) {
@@ -77,13 +79,14 @@ app.get('/login', function (req, res) {
 });
 
 app.post('/login', function (req, res) {
-    console.log(req);
-    if (!req.body.id || !req.body.password) {
+    if (!req.body.userName || !req.body.password) {
         res.render('login', { message: "Please enter both id and password" });
     } else {
-        UserInfo.findOne({ userName: req.body.userName, password: req.body.password }, function (err, respone) {
-            if (respone != null)
-                res.redirect('/protected_page');
+        UserInfo.findOne({ userName: req.body.userName, password: req.body.password }, function (err, response) {
+            if (response != null){
+                req.session.user = response;
+                res.redirect('/authentication/protected_page');
+            }
             else
                 res.render('login', { message: "Invalid credentials!" });
         })
@@ -98,7 +101,6 @@ app.get('/logout', function (req, res) {
 });
 
 app.use('/protected_page', function (err, req, res, next) {
-    console.log(err);
     //User should be authenticated! Redirect him to log in.
     res.redirect('/authentication/login');
 });
